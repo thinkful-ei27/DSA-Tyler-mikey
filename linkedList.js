@@ -195,6 +195,34 @@ function findLast(LL){
   }
 }
 
+function reverseList(LL){
+  // A -> B -> C -> D -> E -> F
+  //  P    C      N
+  // A <- B <- C <- D <- E <- F
+  // 
+  //  
+  //
+  let current = LL.head; 
+  let previous = null; 
+  let next = LL.head.next; 
+  while(current){
+    next = current.next;
+    current.next = previous;
+    previous = current;
+    current = next;
+  }
+  LL.head = previous;
+  return LL;
+
+}
+
+
+
+
+
+
+
+
 function main() {
   const SLL = new LinkedList;
   const test = new LinkedList;
@@ -211,13 +239,13 @@ function main() {
   // SLL.insertAt(3, 'Kat');
   // SLL.remove('tauhida');
   // console.log(JSON.stringify(SLL));
-  display(SLL);
   // size(SLL);
   // isEmpty(test);
   // isEmpty(SLL);
   // findPrevious(SLL, 'banana');
-  findLast(SLL);
-
+  // findLast(SLL);
+  reverseList(SLL);
+  display(SLL);
 }
 
 
