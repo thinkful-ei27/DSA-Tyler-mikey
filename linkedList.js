@@ -138,6 +138,19 @@ class LinkedList {
     }
     previousNode.next = currNode.next;
   }
+
+  cycleThisList(item) {
+    if (this.head === null) {
+      this.insertFirst(item);
+    }
+    else {
+      let tempNode = this.head;
+      while (tempNode.next !== null) {
+        tempNode = tempNode.next;
+      }
+      tempNode.next = new _Node(item, this.head);
+    }
+  }
 }
 
 function display(LL) {
@@ -165,12 +178,12 @@ function isEmpty(LL) {
 }
 
 function findPrevious(LL, item) {
-  if(LL.head.value === item ){
+  if (LL.head.value === item) {
     return console.log(`${item} is the first item in the list`);
   }
   let currNode = LL.head;
   let previous = LL.head;
-  
+
   while (currNode) {
     if (currNode.value === item) {
       console.log(previous.value);
@@ -182,12 +195,12 @@ function findPrevious(LL, item) {
   return console.log(`${item} not found`);
 }
 
-function findLast(LL){
+function findLast(LL) {
   let currNode = LL.head;
   let previous = LL.head;
 
-  while(currNode){
-    if(!currNode.next){
+  while (currNode) {
+    if (!currNode.next) {
       return console.log(currNode.value);
     }
     previous = currNode;
@@ -195,17 +208,17 @@ function findLast(LL){
   }
 }
 
-function reverseList(LL){
+function reverseList(LL) {
   // A -> B -> C -> D -> E -> F
   //  P    C      N
   // A <- B <- C <- D <- E <- F
   // 
   //  
   //
-  let current = LL.head; 
-  let previous = null; 
-  let next = LL.head.next; 
-  while(current){
+  let current = LL.head;
+  let previous = null;
+  let next = LL.head.next;
+  while (current) {
     next = current.next;
     current.next = previous;
     previous = current;
@@ -216,16 +229,65 @@ function reverseList(LL){
 
 }
 
+function thirdFromEnd(LL) {
+  let current = LL.head;
+
+  while (current.next.next.next) {
+    current = current.next;
+  }
+  return console.log(current.value);
+}
 
 
+function middleOfAList(LL) {
 
+  let middle = LL.head;
+  let end = LL.head;
+
+  while (end.next) {
+    end = end.next.next;
+    middle = middle.next;
+    if (!end) {
+      return console.log(middle.value);
+    }
+  }
+  return console.log(middle.value);
+
+}
+
+// a - b - c - d - e - a
+// 
+
+
+function checkForCycle(LL) {
+  let current = LL.head;
+  let isDuplicate = LL.head;
+  while (current) {
+    let nodeToCheck = current;
+          while (nodeToCheck !== isDuplicate) {
+            console.log(nodeToCheck.next);
+            if (!nodeToCheck.next) {
+              return false;
+            }
+            if (nodeToCheck.next === isDuplicate.value) {
+              return true;
+            }
+            else isDuplicate.next;
+            nodeToCheck = current;
+          }
+    isDuplicate = LL.head;
+    current = current.next;
+  }
+  return false;
+
+}
 
 
 
 
 function main() {
   const SLL = new LinkedList;
-  const test = new LinkedList;
+  const CycleList = new LinkedList;
 
   SLL.insertFirst('Apollo');
   SLL.insertLast('Boomer');
@@ -244,8 +306,23 @@ function main() {
   // isEmpty(SLL);
   // findPrevious(SLL, 'banana');
   // findLast(SLL);
-  reverseList(SLL);
-  display(SLL);
+  // reverseList(SLL);
+  // display(SLL);
+  // // thirdFromEnd(SLL);
+  // middleOfAList(SLL);
+
+
+  CycleList.insertFirst('Apollo');
+  CycleList.insertLast('Boomer');
+  CycleList.insertLast('Hello');
+  CycleList.insertLast('Husker');
+  CycleList.cycleThisList('Starbuck');
+  // display(CycleList);
+  // console.log(JSON.stringify(CycleList));
+
+  const booool = checkForCycle(SLL);
+  console.log(booool);
+
 }
 
 
