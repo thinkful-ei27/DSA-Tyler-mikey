@@ -260,21 +260,21 @@ function middleOfAList(LL) {
 
 
 function checkForCycle(LL) {
+
   let current = LL.head;
   let isDuplicate = LL.head;
   while (current) {
-    let nodeToCheck = current;
-          while (nodeToCheck !== isDuplicate) {
-            console.log(nodeToCheck.next);
-            if (!nodeToCheck.next) {
-              return false;
-            }
-            if (nodeToCheck.next === isDuplicate.value) {
-              return true;
-            }
-            else isDuplicate.next;
-            nodeToCheck = current;
-          }
+    let nodeToStopAt = current;
+    let nodeToCheck = current.next;
+    while (nodeToStopAt !== isDuplicate) {
+      if (!nodeToCheck) {
+        return false;
+      }
+      if (nodeToCheck === isDuplicate) {
+        return true;
+      }
+      isDuplicate = isDuplicate.next;
+    }
     isDuplicate = LL.head;
     current = current.next;
   }
@@ -320,8 +320,8 @@ function main() {
   // display(CycleList);
   // console.log(JSON.stringify(CycleList));
 
-  const booool = checkForCycle(SLL);
-  console.log(booool);
+  const isLoop = checkForCycle(CycleList);
+  console.log(isLoop);
 
 }
 
